@@ -1,0 +1,4 @@
+io/flutter/plugins/GeneratedPluginRegistrant.java
+ io.flutter.plugins.GeneratedPluginRegistrant
+eighttechnologies/net/ict4farmers/BuildConfig.java
+ eighttechnologies.net.ict4farmers.BuildConfig

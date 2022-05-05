@@ -1,0 +1,384 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:4558992127983979527",
+      "lastPropertyId": "2:869397511233867059",
+      "name": "TestModels",
+      "properties": [
+        {
+          "id": "1:2770837018491551187",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:869397511233867059",
+          "name": "name",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:6068556915231434278",
+      "lastPropertyId": "12:485105626464077047",
+      "name": "BannerModel",
+      "properties": [
+        {
+          "id": "1:5442533996891107391",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:7994982653451275470",
+          "name": "created_at",
+          "type": 9
+        },
+        {
+          "id": "3:8388438220024658282",
+          "name": "section",
+          "type": 9
+        },
+        {
+          "id": "4:1997328854453468877",
+          "name": "position",
+          "type": 9
+        },
+        {
+          "id": "5:3574171592390384672",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "6:7805483015052649382",
+          "name": "sub_title",
+          "type": 9
+        },
+        {
+          "id": "7:8312855331405585980",
+          "name": "type",
+          "type": 9
+        },
+        {
+          "id": "8:6890971638523552554",
+          "name": "category_id",
+          "type": 9
+        },
+        {
+          "id": "9:7663484089339824327",
+          "name": "product_id",
+          "type": 9
+        },
+        {
+          "id": "10:5936702929388774643",
+          "name": "clicks",
+          "type": 9
+        },
+        {
+          "id": "11:4830140018238047075",
+          "name": "image",
+          "type": 9
+        },
+        {
+          "id": "12:485105626464077047",
+          "name": "local_id",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:8230566592747997954",
+      "lastPropertyId": "17:2286028233152217974",
+      "name": "ProductModel",
+      "properties": [
+        {
+          "id": "1:9188828667964160805",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:7046016624861978023",
+          "name": "created_at",
+          "type": 9
+        },
+        {
+          "id": "3:4679295352909393391",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "4:6641370354206935237",
+          "name": "category_id",
+          "type": 9
+        },
+        {
+          "id": "5:4126427715906654579",
+          "name": "user_id",
+          "type": 9
+        },
+        {
+          "id": "6:908942654643386027",
+          "name": "country_id",
+          "type": 9
+        },
+        {
+          "id": "7:2364803943618644924",
+          "name": "city_id",
+          "type": 9
+        },
+        {
+          "id": "8:5535639953740167577",
+          "name": "price",
+          "type": 9
+        },
+        {
+          "id": "9:2785420881705895608",
+          "name": "slug",
+          "type": 9
+        },
+        {
+          "id": "10:8652316781450673483",
+          "name": "status",
+          "type": 9
+        },
+        {
+          "id": "11:7237733313783208784",
+          "name": "description",
+          "type": 9
+        },
+        {
+          "id": "12:6203276707749307767",
+          "name": "quantity",
+          "type": 9
+        },
+        {
+          "id": "13:8903527035492674821",
+          "name": "images",
+          "type": 9
+        },
+        {
+          "id": "14:2125054384415326963",
+          "name": "thumbnail",
+          "type": 9
+        },
+        {
+          "id": "15:178263253762812123",
+          "name": "attributes",
+          "type": 9
+        },
+        {
+          "id": "16:8427607328762022122",
+          "name": "sub_category_id",
+          "type": 9
+        },
+        {
+          "id": "17:2286028233152217974",
+          "name": "fixed_price",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "4:863251058572222630",
+      "lastPropertyId": "35:2800031019724172006",
+      "name": "UserModel",
+      "properties": [
+        {
+          "id": "1:8172902859220002363",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8743857356493759518",
+          "name": "username",
+          "type": 9
+        },
+        {
+          "id": "3:3260719727279736892",
+          "name": "password",
+          "type": 9
+        },
+        {
+          "id": "4:5431152519860202897",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "5:887040464204219706",
+          "name": "avatar",
+          "type": 9
+        },
+        {
+          "id": "6:3862024547863427791",
+          "name": "remember_token",
+          "type": 9
+        },
+        {
+          "id": "7:4673992760966041019",
+          "name": "created_at",
+          "type": 9
+        },
+        {
+          "id": "8:2522132833941424891",
+          "name": "updated_at",
+          "type": 9
+        },
+        {
+          "id": "9:416948571803249017",
+          "name": "last_name",
+          "type": 9
+        },
+        {
+          "id": "10:2867052133746024621",
+          "name": "company_name",
+          "type": 9
+        },
+        {
+          "id": "11:6495393503923653981",
+          "name": "email",
+          "type": 9
+        },
+        {
+          "id": "12:1879891046339408733",
+          "name": "phone_number",
+          "type": 9
+        },
+        {
+          "id": "13:6998564734866183845",
+          "name": "address",
+          "type": 9
+        },
+        {
+          "id": "14:1678532043436187368",
+          "name": "about",
+          "type": 9
+        },
+        {
+          "id": "15:5532319882322603781",
+          "name": "services",
+          "type": 9
+        },
+        {
+          "id": "16:616040647145192369",
+          "name": "longitude",
+          "type": 9
+        },
+        {
+          "id": "17:5038431018715718749",
+          "name": "latitude",
+          "type": 9
+        },
+        {
+          "id": "18:3292613169471858264",
+          "name": "division",
+          "type": 9
+        },
+        {
+          "id": "19:8836956196013876353",
+          "name": "opening_hours",
+          "type": 9
+        },
+        {
+          "id": "20:8483539885538351752",
+          "name": "cover_photo",
+          "type": 9
+        },
+        {
+          "id": "21:8577482579582264134",
+          "name": "facebook",
+          "type": 9
+        },
+        {
+          "id": "22:4306350843983152639",
+          "name": "twitter",
+          "type": 9
+        },
+        {
+          "id": "23:4098185443513578012",
+          "name": "whatsapp",
+          "type": 9
+        },
+        {
+          "id": "24:1579940729440610126",
+          "name": "youtube",
+          "type": 9
+        },
+        {
+          "id": "25:4638745035510033810",
+          "name": "instagram",
+          "type": 9
+        },
+        {
+          "id": "26:3109581329183337762",
+          "name": "last_seen",
+          "type": 9
+        },
+        {
+          "id": "27:6237129222743548785",
+          "name": "status",
+          "type": 9
+        },
+        {
+          "id": "28:8662849346579543131",
+          "name": "linkedin",
+          "type": 9
+        },
+        {
+          "id": "29:2656714589857951620",
+          "name": "category_id",
+          "type": 9
+        },
+        {
+          "id": "30:8175767974560652491",
+          "name": "status_comment",
+          "type": 9
+        },
+        {
+          "id": "31:2380445709668946293",
+          "name": "country_id",
+          "type": 9
+        },
+        {
+          "id": "32:2847459312304480688",
+          "name": "region",
+          "type": 9
+        },
+        {
+          "id": "33:6685532613728700060",
+          "name": "district",
+          "type": 9
+        },
+        {
+          "id": "34:8700793191072768166",
+          "name": "sub_county",
+          "type": 9
+        },
+        {
+          "id": "35:2800031019724172006",
+          "name": "logged_in_user",
+          "type": 9
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "4:863251058572222630",
+  "lastIndexId": "0:0",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}

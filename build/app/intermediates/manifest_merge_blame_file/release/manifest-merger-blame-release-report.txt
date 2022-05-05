@@ -1,0 +1,230 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="eighttechnologies.net.ict4farmers"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="20"
+8-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml
+9        android:targetSdkVersion="32" />
+9-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+11-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:4:5-79
+11-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:4:22-76
+12    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+12-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:5:5-81
+12-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:5:22-78
+13    <uses-permission android:name="android.permission.INTERNET" />
+13-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:6:5-67
+13-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:6:22-64
+14
+15    <queries>
+15-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:9:5-30:15
+16
+17        <!-- If your app opens https URLs -->
+18        <intent>
+18-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:11:9-14:18
+19            <action android:name="android.intent.action.VIEW" />
+19-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:12:13-65
+19-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:12:21-62
+20
+21            <data android:scheme="https" />
+21-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:13:13-44
+21-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:13:19-41
+22        </intent>
+23        <!-- If your app makes calls -->
+24        <intent>
+24-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:16:9-19:18
+25            <action android:name="android.intent.action.DIAL" />
+25-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:17:13-65
+25-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:17:21-62
+26
+27            <data android:scheme="tel" />
+27-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:13:13-44
+27-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:13:19-41
+28        </intent>
+29        <!-- If your sends SMS messages -->
+30        <intent>
+30-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:21:9-24:18
+31            <action android:name="android.intent.action.SENDTO" />
+31-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:22:13-67
+31-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:22:21-64
+32
+33            <data android:scheme="smsto" />
+33-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:13:13-44
+33-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:13:19-41
+34        </intent>
+35        <!-- If your app sends emails -->
+36        <intent>
+36-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:26:9-29:18
+37            <action android:name="android.intent.action.SEND" />
+37-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:27:13-65
+37-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:27:21-62
+38
+39            <data android:mimeType="*/*" />
+39-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:13:13-44
+39-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:28:19-41
+40        </intent>
+41    </queries>
+42
+43    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+43-->[:geolocator_android] /Users/mac/Desktop/github/hel-dhakhtar/build/geolocator_android/intermediates/library_manifest/release/AndroidManifest.xml:7:5-77
+43-->[:geolocator_android] /Users/mac/Desktop/github/hel-dhakhtar/build/geolocator_android/intermediates/library_manifest/release/AndroidManifest.xml:7:22-74
+44    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+44-->[:connectivity_plus] /Users/mac/Desktop/github/hel-dhakhtar/build/connectivity_plus/intermediates/library_manifest/release/AndroidManifest.xml:7:5-79
+44-->[:connectivity_plus] /Users/mac/Desktop/github/hel-dhakhtar/build/connectivity_plus/intermediates/library_manifest/release/AndroidManifest.xml:7:22-76
+45
+46    <uses-feature
+46-->[com.google.android.gms:play-services-maps:17.0.0] /Users/mac/.gradle/caches/transforms-2/files-2.1/6f3daa1ca7d5f0cb334e07491a88b930/jetified-play-services-maps-17.0.0/AndroidManifest.xml:26:5-28:35
+47        android:glEsVersion="0x00020000"
+47-->[com.google.android.gms:play-services-maps:17.0.0] /Users/mac/.gradle/caches/transforms-2/files-2.1/6f3daa1ca7d5f0cb334e07491a88b930/jetified-play-services-maps-17.0.0/AndroidManifest.xml:27:9-41
+48        android:required="true" />
+48-->[com.google.android.gms:play-services-maps:17.0.0] /Users/mac/.gradle/caches/transforms-2/files-2.1/6f3daa1ca7d5f0cb334e07491a88b930/jetified-play-services-maps-17.0.0/AndroidManifest.xml:28:9-32
+49
+50    <application
+51        android:name="android.app.Application"
+51-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:33:9-42
+52        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+52-->[androidx.core:core:1.6.0] /Users/mac/.gradle/caches/transforms-2/files-2.1/122df2e57d294d1a53db26bbc3b813c1/core-1.6.0/AndroidManifest.xml:24:18-86
+53        android:icon="@drawable/logo"
+53-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:34:9-38
+54        android:label="Hel-dhaktar" >
+54-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:35:9-36
+55
+56        <!-- Place your Google Map API KEY here at value -->
+57        <meta-data
+57-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:39:9-41:71
+58            android:name="com.google.android.geo.API_KEY"
+58-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:40:13-58
+59            android:value="AIzaSyAcctJQgkbQQI37Ae_2rAeck-l6nyDRQj0" />
+59-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:41:13-68
+60
+61        <activity
+61-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:43:9-62:20
+62            android:name="eighttechnologies.net.ict4farmers.MainActivity"
+62-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:44:13-41
+63            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+63-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:45:13-163
+64            android:exported="true"
+64-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:46:13-36
+65            android:hardwareAccelerated="true"
+65-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:47:13-47
+66            android:launchMode="singleTop"
+66-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:48:13-43
+67            android:theme="@style/LaunchTheme"
+67-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:49:13-47
+68            android:windowSoftInputMode="adjustResize" >
+68-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:50:13-55
+69
+70            <!--
+71                 Specifies an Android theme to apply to this Activity as soon as
+72                 the Android process has started. This theme is visible to the user
+73                 while the Flutter UI initializes. After that, this theme continues
+74                 to determine the Window background behind the Flutter UI.
+75            -->
+76            <meta-data
+76-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:55:13-57:57
+77                android:name="io.flutter.embedding.android.NormalTheme"
+77-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:56:17-72
+78                android:resource="@style/NormalTheme" />
+78-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:57:17-54
+79
+80            <intent-filter>
+80-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:58:13-61:29
+81                <action android:name="android.intent.action.MAIN" />
+81-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:59:17-69
+81-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:59:25-66
+82
+83                <category android:name="android.intent.category.LAUNCHER" />
+83-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:60:17-77
+83-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:60:27-74
+84            </intent-filter>
+85        </activity>
+86        <!--
+87             Don't delete the meta-data below.
+88             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+89        -->
+90        <meta-data
+90-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:65:9-67:33
+91            android:name="flutterEmbedding"
+91-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:66:13-44
+92            android:value="2" />
+92-->/Users/mac/Desktop/github/hel-dhakhtar/android/app/src/main/AndroidManifest.xml:67:13-30
+93
+94        <service
+94-->[:geolocator_android] /Users/mac/Desktop/github/hel-dhakhtar/build/geolocator_android/intermediates/library_manifest/release/AndroidManifest.xml:10:9-14:56
+95            android:name="com.baseflow.geolocator.GeolocatorLocationService"
+95-->[:geolocator_android] /Users/mac/Desktop/github/hel-dhakhtar/build/geolocator_android/intermediates/library_manifest/release/AndroidManifest.xml:11:13-77
+96            android:enabled="true"
+96-->[:geolocator_android] /Users/mac/Desktop/github/hel-dhakhtar/build/geolocator_android/intermediates/library_manifest/release/AndroidManifest.xml:12:13-35
+97            android:exported="false"
+97-->[:geolocator_android] /Users/mac/Desktop/github/hel-dhakhtar/build/geolocator_android/intermediates/library_manifest/release/AndroidManifest.xml:13:13-37
+98            android:foregroundServiceType="location" />
+98-->[:geolocator_android] /Users/mac/Desktop/github/hel-dhakhtar/build/geolocator_android/intermediates/library_manifest/release/AndroidManifest.xml:14:13-53
+99
+100        <provider
+100-->[:image_picker] /Users/mac/Desktop/github/hel-dhakhtar/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:8:9-16:20
+101            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
+101-->[:image_picker] /Users/mac/Desktop/github/hel-dhakhtar/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:9:13-82
+102            android:authorities="eighttechnologies.net.ict4farmers.flutter.image_provider"
+102-->[:image_picker] /Users/mac/Desktop/github/hel-dhakhtar/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:10:13-74
+103            android:exported="false"
+103-->[:image_picker] /Users/mac/Desktop/github/hel-dhakhtar/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:11:13-37
+104            android:grantUriPermissions="true" >
+104-->[:image_picker] /Users/mac/Desktop/github/hel-dhakhtar/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:12:13-47
+105            <meta-data
+105-->[:image_picker] /Users/mac/Desktop/github/hel-dhakhtar/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:13:13-15:75
+106                android:name="android.support.FILE_PROVIDER_PATHS"
+106-->[:image_picker] /Users/mac/Desktop/github/hel-dhakhtar/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:14:17-67
+107                android:resource="@xml/flutter_image_picker_file_paths" />
+107-->[:image_picker] /Users/mac/Desktop/github/hel-dhakhtar/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:15:17-72
+108        </provider>
+109
+110        <activity
+110-->[:url_launcher_android] /Users/mac/Desktop/github/hel-dhakhtar/build/url_launcher_android/intermediates/library_manifest/release/AndroidManifest.xml:8:9-11:74
+111            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
+111-->[:url_launcher_android] /Users/mac/Desktop/github/hel-dhakhtar/build/url_launcher_android/intermediates/library_manifest/release/AndroidManifest.xml:9:13-74
+112            android:exported="false"
+112-->[:url_launcher_android] /Users/mac/Desktop/github/hel-dhakhtar/build/url_launcher_android/intermediates/library_manifest/release/AndroidManifest.xml:10:13-37
+113            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+113-->[:url_launcher_android] /Users/mac/Desktop/github/hel-dhakhtar/build/url_launcher_android/intermediates/library_manifest/release/AndroidManifest.xml:11:13-71
+114
+115        <uses-library
+115-->[androidx.window:window:1.0.0-beta04] /Users/mac/.gradle/caches/transforms-2/files-2.1/03c633e46d75bfb21f082f0417f55161/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
+116            android:name="androidx.window.extensions"
+116-->[androidx.window:window:1.0.0-beta04] /Users/mac/.gradle/caches/transforms-2/files-2.1/03c633e46d75bfb21f082f0417f55161/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
+117            android:required="false" />
+117-->[androidx.window:window:1.0.0-beta04] /Users/mac/.gradle/caches/transforms-2/files-2.1/03c633e46d75bfb21f082f0417f55161/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
+118        <uses-library
+118-->[androidx.window:window:1.0.0-beta04] /Users/mac/.gradle/caches/transforms-2/files-2.1/03c633e46d75bfb21f082f0417f55161/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
+119            android:name="androidx.window.sidecar"
+119-->[androidx.window:window:1.0.0-beta04] /Users/mac/.gradle/caches/transforms-2/files-2.1/03c633e46d75bfb21f082f0417f55161/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
+120            android:required="false" /> <!-- Needs to be explicitly declared on P+ -->
+120-->[androidx.window:window:1.0.0-beta04] /Users/mac/.gradle/caches/transforms-2/files-2.1/03c633e46d75bfb21f082f0417f55161/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
+121        <uses-library
+121-->[com.google.android.gms:play-services-maps:17.0.0] /Users/mac/.gradle/caches/transforms-2/files-2.1/6f3daa1ca7d5f0cb334e07491a88b930/jetified-play-services-maps-17.0.0/AndroidManifest.xml:33:9-35:40
+122            android:name="org.apache.http.legacy"
+122-->[com.google.android.gms:play-services-maps:17.0.0] /Users/mac/.gradle/caches/transforms-2/files-2.1/6f3daa1ca7d5f0cb334e07491a88b930/jetified-play-services-maps-17.0.0/AndroidManifest.xml:34:13-50
+123            android:required="false" />
+123-->[com.google.android.gms:play-services-maps:17.0.0] /Users/mac/.gradle/caches/transforms-2/files-2.1/6f3daa1ca7d5f0cb334e07491a88b930/jetified-play-services-maps-17.0.0/AndroidManifest.xml:35:13-37
+124
+125        <activity
+125-->[com.google.android.gms:play-services-base:17.0.0] /Users/mac/.gradle/caches/transforms-2/files-2.1/3679fa9be1d67d14c72169d3353f14d4/jetified-play-services-base-17.0.0/AndroidManifest.xml:23:9-26:75
+126            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+126-->[com.google.android.gms:play-services-base:17.0.0] /Users/mac/.gradle/caches/transforms-2/files-2.1/3679fa9be1d67d14c72169d3353f14d4/jetified-play-services-base-17.0.0/AndroidManifest.xml:24:13-79
+127            android:exported="false"
+127-->[com.google.android.gms:play-services-base:17.0.0] /Users/mac/.gradle/caches/transforms-2/files-2.1/3679fa9be1d67d14c72169d3353f14d4/jetified-play-services-base-17.0.0/AndroidManifest.xml:25:13-37
+128            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+128-->[com.google.android.gms:play-services-base:17.0.0] /Users/mac/.gradle/caches/transforms-2/files-2.1/3679fa9be1d67d14c72169d3353f14d4/jetified-play-services-base-17.0.0/AndroidManifest.xml:26:13-72
+129
+130        <meta-data
+130-->[com.google.android.gms:play-services-basement:17.0.0] /Users/mac/.gradle/caches/transforms-2/files-2.1/a7975ba3cb0c3630bd14453686890431/jetified-play-services-basement-17.0.0/AndroidManifest.xml:23:9-25:69
+131            android:name="com.google.android.gms.version"
+131-->[com.google.android.gms:play-services-basement:17.0.0] /Users/mac/.gradle/caches/transforms-2/files-2.1/a7975ba3cb0c3630bd14453686890431/jetified-play-services-basement-17.0.0/AndroidManifest.xml:24:13-58
+132            android:value="@integer/google_play_services_version" />
+132-->[com.google.android.gms:play-services-basement:17.0.0] /Users/mac/.gradle/caches/transforms-2/files-2.1/a7975ba3cb0c3630bd14453686890431/jetified-play-services-basement-17.0.0/AndroidManifest.xml:25:13-66
+133    </application>
+134
+135</manifest>
