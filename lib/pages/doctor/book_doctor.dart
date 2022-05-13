@@ -3,12 +3,14 @@ import 'package:flutx/flutx.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ict4farmers/pages/doctor/doctro_results_screen.dart';
+import 'package:ict4farmers/pages/location_picker/order_location_main.dart';
 import 'package:ict4farmers/theme/app_notifier.dart';
 import 'package:ict4farmers/theme/app_theme.dart';
 import 'package:ict4farmers/utils/Utils.dart';
 import 'package:ict4farmers/widgets/images.dart';
 import 'package:provider/provider.dart';
 
+import '../../models/LocationModel.dart';
 import '../../widget/my_widgets.dart';
 import '../location_picker/product_category_picker.dart';
 
@@ -26,7 +28,8 @@ class ABookDoctorScreenState extends State<BookDoctorScreen> {
   @override
   void initState() {
     super.initState();
-    get_location();
+
+    Utils.bootstrap();
     check_login();
 
     FxTextStyle.changeFontFamily(GoogleFonts.roboto);
@@ -154,6 +157,20 @@ class ABookDoctorScreenState extends State<BookDoctorScreen> {
   }
 
   Future<void> book_doctor() async {
+    List<LocationModel> locs = await LocationModel.get_all();
+    print("romina ======> ${locs.length} <======");
+
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => OrderLocationMain()),
+    );
+
+    if (result != null) {
+      if ((result['location_sub_id'] != null) &&
+          (result['location_sub_name'] != null)) {}
+    }
+
+    return;
     if (lati == 0 && long == 0) {
       await get_location();
     }

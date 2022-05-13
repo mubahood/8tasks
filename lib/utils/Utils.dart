@@ -52,6 +52,10 @@ class Utils {
     );
   }
 
+  static void bootstrap() async {
+    await LocationModel.get_all();
+  }
+
   static bool bool_parse(dynamic x) {
     int temp = 0;
     bool ans = false;
