@@ -47,6 +47,7 @@ class DoctorResultsScreenState extends State<DoctorResultsScreen> {
   @override
   void initState() {
     super.initState();
+    AppTheme.init();
     customTheme = AppTheme.customTheme;
     theme = AppTheme.theme;
     _do_refresh();
@@ -280,7 +281,7 @@ class DoctorResultsScreenState extends State<DoctorResultsScreen> {
                           fontSize: 18),
                     ),
                     FxText(
-                      "Price: ${item.price}",
+                      "Price: USD ${item.price}",
                       maxLines: 1,
                       fontSize: 14,
                       color: Colors.grey.shade600,
@@ -326,7 +327,7 @@ class DoctorResultsScreenState extends State<DoctorResultsScreen> {
                             submit_appointment(item);
                           },
                           child: FxText.l1(
-                            "CONFIRM APPOINTMENT",
+                            "Gudbi balanta aad codsatay",
                             color: Colors.white,
                             fontSize: 20,
                             fontWeight: 700,

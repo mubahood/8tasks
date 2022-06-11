@@ -5,7 +5,6 @@ import 'package:flutx/utils/spacing.dart';
 import 'package:flutx/widgets/button/button.dart';
 import 'package:flutx/widgets/container/container.dart';
 import 'package:flutx/widgets/text/text.dart';
-import 'package:ict4farmers/models/ChatModel.dart';
 import 'package:ict4farmers/models/FormItemModel.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -43,7 +42,6 @@ class LoggedInScreenState extends State<LoggedInScreen> {
   }
 
   bool _has_pending_form = false;
-  List<ChatModel> chat_threads = [];
 
   Future<void> my_init() async {
     logged_in_user = await Utils.get_logged_in();
@@ -51,7 +49,7 @@ class LoggedInScreenState extends State<LoggedInScreen> {
       Utils.showSnackBar("Login before you proceed.", _context, Colors.red);
       return;
     }
-    chat_threads = await ChatModel.get_threads(logged_in_user.id);
+
     await check_daft_form();
     setState(() {});
   }
@@ -68,29 +66,19 @@ class LoggedInScreenState extends State<LoggedInScreen> {
   Widget build(BuildContext context) {
     return ListView(
       padding:
-          FxSpacing.fromLTRB(20, FxSpacing.safeAreaTop(_context) + 20, 20, 20),
+          FxSpacing.fromLTRB(20, FxSpacing.safeAreaTop(_context) + 40, 20, 20),
       children: <Widget>[
         Column(
           children: <Widget>[
-            FxContainer.rounded(
+            FxContainer(
               paddingAll: 0,
-              width: 100,
-              height: 100,
-              child: CachedNetworkImage(
-                width: 100,
-                height: 100,
+
+              borderRadiusAll: 0,
+              child: Image(
+                image: AssetImage('./assets/project/logo_1.png'),
+                height: 180,
+
                 fit: BoxFit.cover,
-                imageUrl: logged_in_user.avatar,
-                placeholder: (context, url) => ShimmerLoadingWidget(
-                  height: 100,
-                  width: 100,
-                ),
-                errorWidget: (context, url, error) => Image(
-                  image: AssetImage('./assets/project/no_image.jpg'),
-                  height: 100,
-                  width: 100,
-                  fit: BoxFit.cover,
-                ),
               ),
             ),
             FxSpacing.height(8),
@@ -100,22 +88,6 @@ class LoggedInScreenState extends State<LoggedInScreen> {
         FxSpacing.height(24),
         Column(
           children: <Widget>[
-             
-            Divider(),
-            singleOption(_context, theme,
-                iconData: MdiIcons.shapeOutline,
-                option: "My Appointments",
-                navigation: ''),
-            Divider(),
-            singleOption(_context, theme,
-                iconData: Icons.manage_accounts,
-                option: "My Profile",
-                navigation: AppConfig.AccountEdit),
-            Divider(),
-            singleOption(_context, theme,
-                iconData: Icons.access_alarm_outlined,
-                option: "Health tips",
-                navigation: AppConfig.SellFast),
             Divider(),
             singleOption(_context, theme,
                 iconData: MdiIcons.creditCardOutline,
@@ -123,11 +95,15 @@ class LoggedInScreenState extends State<LoggedInScreen> {
                 navigation: AppConfig.AboutUs),
             Divider(),
             singleOption(_context, theme,
+                iconData: MdiIcons.creditCardOutline,
+                option: "Habka aad lcgta u bixi karto",
+                navigation: AppConfig.PaymentPage),
+            Divider(),
+            singleOption(_context, theme,
                 iconData: MdiIcons.faceAgent,
-                option: "Help \& Support",
+                option: "Caawimaad iyo Hagid.",
                 navigation: AppConfig.CallUs),
             Divider(),
-
             Container(
               margin: EdgeInsets.only(top: 5),
               child: Row(
@@ -212,31 +188,6 @@ class LoggedInScreenState extends State<LoggedInScreen> {
 
             FxSpacing.height(24),
 
-            Center(
-              child: FxButton(
-                elevation: 0,
-                backgroundColor: CustomTheme.primary,
-                borderRadiusAll: 4,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      MdiIcons.logoutVariant,
-                      color: CustomTheme.onPrimary,
-                      size: 18,
-                    ),
-                    FxSpacing.width(16),
-                    FxText.caption("LOGOUT",
-                        letterSpacing: 0.3,
-                        fontWeight: 600,
-                        color: CustomTheme.onPrimary)
-                  ],
-                ),
-                onPressed: () {
-                  do_logout();
-                },
-              ),
-            ),
           ],
         )
       ],

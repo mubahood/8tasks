@@ -15,7 +15,6 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:provider/provider.dart';
 
 import '../../models/BannerModel.dart';
-import '../../models/ChatModel.dart';
 import '../../models/ProductModel.dart';
 import '../../theme/app_notifier.dart';
 import '../../theme/material_theme.dart';
@@ -23,8 +22,6 @@ import '../../utils/Utils.dart';
 import '../../widget/my_widgets.dart';
 import '../../widget/product_item_ui.dart';
 import '../../widget/shimmer_loading_widget.dart';
-import '../chat/chat_screen.dart';
-
 class ProductDetails extends StatefulWidget {
   ProductModel productModel;
 
@@ -446,8 +443,7 @@ class ProductDetailsState extends State<ProductDetails> {
                                           show_not_account_bottom_sheet(
                                               context);
                                         }
-                                        else
-                                        {start_chat();}
+
 
 
                                       },
@@ -483,38 +479,7 @@ class ProductDetailsState extends State<ProductDetails> {
     );
   }
 
-  start_chat() {
 
-    ChatModel chatThread = new ChatModel();
-    chatThread.id = 0;
-    chatThread.created_at = 'Just now';
-    chatThread.body = '';
-    chatThread.receiver_pic = '';
-    chatThread.sender = logged_in_user.id.toString();
-    chatThread.receiver = productModel.user_id.toString();
-    chatThread.product_id = productModel.id.toString();
-    chatThread.thread =
-        '${chatThread.sender}-${chatThread.receiver}-${chatThread.product_id}';
-    chatThread.received = false;
-    chatThread.seen = false;
-    chatThread.type = '';
-    chatThread.contact = '';
-    chatThread.gps = '';
-    chatThread.file = '';
-    chatThread.image = '';
-    chatThread.audio = '';
-    chatThread.receiver_name = '';
-    chatThread.sender_name = logged_in_user.name;
-    chatThread.product_name = productModel.name;
-    chatThread.product_pic = '';
-    chatThread.sender_pic = logged_in_user.avatar;
-    chatThread.unread_count = 0;
-
-
-
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => ChatScreen(chatThread)));
-  }
 }
 
 List<Widget> _buildHouseList() {

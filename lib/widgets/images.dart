@@ -94,8 +94,8 @@ class Images {
       'assets/icons/range_slider_horizontal_outline.png';
   static String rangeSelectorIcon = 'assets/icons/range_selector_outline.png';
   static String settingIcon = 'assets/icons/setting_outline.png';
-  static String logo_1 = 'assets/project/logo.jpeg';
-  static String logo_2 = 'assets/project/logo.jpeg';
+  static String logo_1 = 'assets/project/logo_1.png';
+  static String logo_2 = 'assets/project/logo_1.png';
   static String doctor  = 'assets/project/doctor.png';
 
   static final String darkModeOutline = "assets/icons/moon_outline.png";

@@ -179,8 +179,8 @@ Widget SuccessWidget(BuildContext context,
 }
 
 Widget NoAccountWidget(BuildContext context,
-    {String body: "You are not logged in yet.\n\n"
-        "Create your ${AppConfig.AppName} account today! and make appointment with any doctor across Somalia!",
+    {String body: "Wali ma aadan soo galin.\n\n"
+        "Abuur akoonkaaga ${AppConfig.AppName} maanta! oo aad ballan la yeelato dhaqaatiirta Soomaaliya oo dhan!",
     String action_text: "",
     String empty_image: ""}) {
   String _empty_image = './assets/project/no_account.png';
@@ -245,7 +245,7 @@ Widget NoAccountWidget(BuildContext context,
                   Utils.navigate_to(AppConfig.AccountRegister, context);
                 },
                 child: FxText.l1(
-                  "CREATE ACCOUNT",
+                  "ABUUR XISAAB",
                   color: CustomTheme.accent,
                   letterSpacing: 0.5,
                 ),
@@ -262,7 +262,7 @@ Widget NoAccountWidget(BuildContext context,
                   Utils.navigate_to(AppConfig.AccountLogin, context);
                 },
                 child: FxText.l1(
-                  "LOG IN",
+                  "SOO GAL",
                   color: Colors.white,
                   letterSpacing: 0.5,
                 ),

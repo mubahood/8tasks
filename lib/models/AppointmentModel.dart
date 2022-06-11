@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:ict4farmers/models/DynamicTable.dart';
 import 'package:ict4farmers/models/UserModel.dart';
+import 'package:ict4farmers/utils/Utils.dart';
 
 class AppointmentModel {
   int id = 0;
@@ -36,8 +37,10 @@ class AppointmentModel {
     required bool clear_previous,
   }) async {
     List<AppointmentModel> items = [];
-    List<DynamicTable> dynamic_items = await DynamicTable.get_local_items(
-        endpoint: AppointmentModel.end_point);
+    List<DynamicTable> dynamic_items = await DynamicTable.get_items(
+        end_point: AppointmentModel.end_point,params: params, clear_previous: true);
+
+
 
     if (dynamic_items.isEmpty) {
       await DynamicTable.get_items(
@@ -76,27 +79,27 @@ class AppointmentModel {
 
     item.price = data['price'];
     item.created_at = data['created_at'];
-    item.hospital_id = data['hospital_id'];
+    item.hospital_id = Utils.int_parse(data['hospital_id']);
     item.payment_method = data['payment_method'].toString();
     item.payment_status = data['payment_status'].toString();
-    item.doctor_id = data['doctor_id'];
-    item.client_id = data['client_id'];
+    item.doctor_id = Utils.int_parse(data['doctor_id']);
+    item.client_id = Utils.int_parse(data['client_id']);
     item.status = data['status'];
     item.price = data['price'];
-    item.latitude = data['latitude'];
-    item.longitude = data['longitude'];
-    item.order_location = data['order_location'];
-    item.category_id = data['category_id'];
-    item.appointment_time = data['appointment_time'];
-    item.details = data['details'];
-    item.client = UserModel.fromMap(data['client']);
-    item.doctor = UserModel.fromMap(data['doctor']);
+    item.latitude = data['latitude'].toString();
+    item.longitude = data['longitude'].toString();
+    item.order_location = data['order_location'].toString();
+    item.category_id = data['category_id'].toString();
+    item.appointment_time = data['appointment_time'].toString();
+    item.details = data['details'].toString();
+/*    item.client = UserModel.fromMap(data['client']);
+    item.doctor = UserModel.fromMap(data['doctor']);*/
     item.hospital_name = data['hospital']['name'];
     item.hospital_location_id = data['hospital']['location_id'].toString();
-    item.hospital_photo = data['hospital']['photo'];
+ /*   item.hospital_photo = data['hospital']['photo'];
     item.hospital_details = data['hospital']['details'];
     item.hospital_latitude = data['hospital']['latitude'];
-    item.hospital_longitude = data['hospital']['longitude'];
+    item.hospital_longitude = data['hospital']['longitude'];*/
 
     return item;
   }

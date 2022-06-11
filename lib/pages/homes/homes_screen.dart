@@ -41,10 +41,11 @@ class _HomesScreenState extends State<HomesScreen>
     super.initState();
     AppTheme.init();
 
+
     navItems = [
-      NavItem('Book Doctor', Images.svg_home, BookDoctorScreen()),
-      NavItem('Appointments', Images.svg_category, MyProductsScreen()),
-      NavItem('Account', Images.svg_user, AccountSplash()),
+      NavItem('Ballanso dhakhtar', Images.svg_home, BookDoctorScreen()),
+      NavItem('Balantayda', Images.svg_category, MyProductsScreen()),
+      NavItem('Xogta appka', Images.svg_user, AccountSplash()),
     ];
 
 

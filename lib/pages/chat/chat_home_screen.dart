@@ -6,15 +6,13 @@ import 'package:ict4farmers/widget/shimmer_list_loading_widget.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/ChatModel.dart';
+
 import '../../models/UserModel.dart';
 import '../../theme/app_notifier.dart';
 import '../../theme/app_theme.dart';
 import '../../theme/custom_theme.dart';
 import '../../utils/Utils.dart';
 import '../../widget/shimmer_loading_widget.dart';
-import 'chat_screen.dart';
-
 class ChatHomeScreen extends StatefulWidget {
   @override
   _ChatHomeScreenState createState() => _ChatHomeScreenState();
@@ -26,7 +24,6 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
   bool is_logged_in = false;
   bool is_loading = true;
   UserModel logged_in_user = new UserModel();
-  List<ChatModel> chat_threads = [];
 
   @override
   void initState() {
@@ -47,8 +44,6 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
     } else {
       is_logged_in = true;
     }
-    chat_threads = await ChatModel.get_threads(logged_in_user.id);
-
     setState(() {
       is_loading = false;
     });
@@ -99,18 +94,7 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                       backgroundColor: Colors.white,
                       child: CustomScrollView(
                         slivers: [
-                          SliverList(
-                            delegate: SliverChildBuilderDelegate(
-                              (BuildContext context, int index) {
-                                return Container(
-                                  padding: EdgeInsets.all(10),
-                                  child: singleChat(chat_threads[index]),
-                                );
-                              },
-                              childCount:
-                                  chat_threads.length, // 1000 list items
-                            ),
-                          )
+
                         ],
                       ),
                     ),
@@ -123,140 +107,6 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
 
   void _showFullImage(String imagePath, String imageTag) {}
 
-  Widget singleChat(ChatModel item) {
-    bool isActive = true;
-    bool show_sender = false;
-
-    if (item.sender.toString() == logged_in_user.id.toString()) {
-      show_sender = false;
-    } else {
-      show_sender = true;
-    }
-
-    bool isNew = true;
-    bool hasBadge = true;
-    if (item.unread_count > 0) {
-      isActive = true;
-      hasBadge = true;
-      isNew = true;
-    } else {
-      isActive = false;
-      isNew = false;
-      hasBadge = false;
-    }
-
-    Widget badgeWidget = (!hasBadge)
-        ? Container()
-        : Container(
-            padding: FxSpacing.all(6),
-            decoration: BoxDecoration(
-                color: CustomTheme.accent, shape: BoxShape.circle),
-            child: FxText.caption(item.unread_count.toString(),
-                fontSize: 12, color: theme.colorScheme.onPrimary),
-          );
-
-    return InkWell(
-      onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => ChatScreen(item)));
-      },
-      child: Container(
-        padding: EdgeInsets.only(left: 8, right: 8),
-        child: Row(
-          children: <Widget>[
-            Stack(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(26)),
-                  child: InkWell(
-                    onTap: () {
-                      //_showFullImage('./assets/project/no_image.jpg', "anjane");
-                    },
-                    child: Hero(
-                      tag: "romina",
-                      transitionOnUserGestures: true,
-                      child: CachedNetworkImage(
-                        height: 52,
-                        width: 52,
-                        fit: BoxFit.cover,
-                        imageUrl:
-                            show_sender ? item.sender_pic : item.receiver_pic,
-                        placeholder: (context, url) => ShimmerLoadingWidget(
-                          height: 52,
-                          width: 52,
-                        ),
-                        errorWidget: (context, url, error) => Image(
-                          image: AssetImage('./assets/project/no_image.jpg'),
-                          height: 52,
-                          width: 52,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                isActive
-                    ? Positioned(
-                        bottom: 2,
-                        right: 2,
-                        child: Container(
-                          decoration: BoxDecoration(
-                              border:
-                                  Border.all(color: customTheme.card, width: 2),
-                              shape: BoxShape.circle),
-                          child: Container(
-                            width: 8,
-                            height: 8,
-                            decoration: BoxDecoration(
-                                color: customTheme.colorSuccess,
-                                shape: BoxShape.circle),
-                          ),
-                        ),
-                      )
-                    : Container()
-              ],
-            ),
-            Expanded(
-              child: Container(
-                margin: FxSpacing.left(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    FxText.b1(
-                        show_sender ? item.sender_name : item.receiver_name,
-                        maxLines: 1,
-                        color: theme.colorScheme.onBackground,
-                        fontWeight: 700),
-                    FxText.b2(item.body,
-                        color:
-                            isNew ? Colors.grey.shade600 : Colors.grey.shade500,
-                        fontWeight: isNew ? 600 : 500,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis),
-                  ],
-                ),
-              ),
-            ),
-            Container(
-              margin: FxSpacing.left(16),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>[
-                  FxText.caption(item.created_at,
-                      color:
-                          isNew ? Colors.grey.shade600 : Colors.grey.shade700,
-                      letterSpacing: -0.2,
-                      fontWeight: isNew ? 600 : 500),
-                  badgeWidget
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
 
   Widget singleOption(
       {IconData? icon, required String title, Widget? navigation}) {

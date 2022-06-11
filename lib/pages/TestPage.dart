@@ -13,7 +13,6 @@ class TestPage extends StatefulWidget {
 class _TestPageState extends State<TestPage> {
   @override
   void initState() {
-    print("====> INITNG... <[====");
   }
 
   List<String> _items = [];

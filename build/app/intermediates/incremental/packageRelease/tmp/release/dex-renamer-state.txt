@@ -1,4 +1,4 @@
-#Mon Apr 25 20:34:49 EAT 2022
+#Sun Jun 05 09:58:34 EAT 2022
 base.0=/Users/mac/Desktop/github/hel-dhakhtar/build/app/intermediates/dex/release/minifyReleaseWithR8/classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

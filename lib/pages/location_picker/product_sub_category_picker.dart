@@ -20,7 +20,6 @@ class ProductSubCategoryPicker extends StatefulWidget {
       PproducSsuCcategorPpicker(this.initial_data);
 }
 
-late CustomTheme customTheme;
 String title = "Pick a sub-category";
 bool is_loading = false;
 
@@ -32,8 +31,8 @@ class PproducSsuCcategorPpicker extends State<ProductSubCategoryPicker> {
   @override
   void initState() {
     super.initState();
-    customTheme = AppTheme.customTheme;
     _do_refresh();
+    AppTheme.init();
   }
 
   List<CategoryModel> items = [];

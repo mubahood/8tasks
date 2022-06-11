@@ -1,8 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter/rendering.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:ict4farmers/utils/AppConfig.dart';
 import 'package:ict4farmers/utils/Utils.dart';
 
 part 'LocationModel.g.dart';
@@ -69,6 +67,7 @@ class LocationModel extends HiveObject {
 
   static LocationModel fromJson(data) {
     LocationModel item = new LocationModel();
+
     item.id = 0;
     if (data['id'] != null) {
       try {
@@ -78,14 +77,9 @@ class LocationModel extends HiveObject {
       }
     }
 
-    item.parent_id = int.parse(data['parent_id'].toString());
-    item.type = data['type'].toString();
-    item.listed = data['listed'].toString();
-    item.image = data['image'].toString();
-    item.details = data['details'].toString();
-    item.latitude = data['latitude'].toString();
-    item.longitude = data['longitude'].toString();
+    item.parent_id = Utils.int_parse(data['parent']);
     item.name = data['name'].toString();
+    item.details = data['details'].toString();
 
     return item;
   }

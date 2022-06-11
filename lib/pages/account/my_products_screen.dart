@@ -59,6 +59,7 @@ class MyProductsScreenState extends State<MyProductsScreen> {
       return;
     }
 
+    items.clear();
     items = await AppointmentModel.get_items(
         params: {'client_id': userModel.id}, clear_previous: true);
     setState(() {
@@ -74,9 +75,10 @@ class MyProductsScreenState extends State<MyProductsScreen> {
         builder: (BuildContext context, AppNotifier value, Widget? child) {
       return Scaffold(
           appBar: AppBar(
+            backgroundColor: CustomTheme.primary,
             systemOverlayStyle: SystemUiOverlayStyle(
-              statusBarColor: Colors.white,
-              statusBarIconBrightness: Brightness.dark,
+              statusBarColor: CustomTheme.primary,
+              statusBarIconBrightness: Brightness.light,
               // For Android (dark icons)
               statusBarBrightness: Brightness.light, // For iOS (dark icons)
             ),
@@ -91,7 +93,7 @@ class MyProductsScreenState extends State<MyProductsScreen> {
                     children: [
                       Text(
                         title,
-                        style: TextStyle(color: Colors.black),
+                        style: TextStyle(color: Colors.white),
                       ),
                     ],
                   ),
@@ -106,13 +108,13 @@ class MyProductsScreenState extends State<MyProductsScreen> {
                       onRefresh: _do_refresh,
                       color: CustomTheme.primary,
                       backgroundColor: Colors.white,
-                      child: items.isEmpty
+                      child: /*items.isEmpty
                           ? EmptyList(
                               body:
                                   "You have not placed any doctor appointment.",
                               action_text:
                                   "Press on the Plus (+) button to book a doctor.")
-                          : CustomScrollView(
+                          :*/ CustomScrollView(
                               slivers: [
                                 SliverList(
                                   delegate: SliverChildBuilderDelegate(
@@ -196,7 +198,7 @@ class MyProductsScreenState extends State<MyProductsScreen> {
                       ),
                       Container(
                         child: FxText(
-                          'SOS ${item.price}',
+                          'USD ${item.price}',
                           maxLines: 1,
                           fontSize: 18,
                           fontWeight: 600,

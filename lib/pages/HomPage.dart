@@ -19,6 +19,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    AppTheme.init();
     theme = AppTheme.theme;
     customTheme = AppTheme.customTheme;
   }

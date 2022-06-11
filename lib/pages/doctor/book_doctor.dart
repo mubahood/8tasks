@@ -3,14 +3,13 @@ import 'package:flutx/flutx.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ict4farmers/pages/doctor/doctro_results_screen.dart';
-import 'package:ict4farmers/pages/location_picker/order_location_main.dart';
+import 'package:ict4farmers/pages/location_picker/order_location_sub.dart';
 import 'package:ict4farmers/theme/app_notifier.dart';
 import 'package:ict4farmers/theme/app_theme.dart';
 import 'package:ict4farmers/utils/Utils.dart';
 import 'package:ict4farmers/widgets/images.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/LocationModel.dart';
 import '../../widget/my_widgets.dart';
 import '../location_picker/product_category_picker.dart';
 
@@ -23,14 +22,12 @@ class ABookDoctorScreenState extends State<BookDoctorScreen> {
   late CustomTheme customTheme;
   late ThemeData theme;
   bool is_loading = true;
-  bool is_logged_in = true;
 
   @override
   void initState() {
     super.initState();
 
     Utils.bootstrap();
-    check_login();
 
     FxTextStyle.changeFontFamily(GoogleFonts.roboto);
     FxTextStyle.changeDefaultFontWeight({
@@ -59,24 +56,39 @@ class ABookDoctorScreenState extends State<BookDoctorScreen> {
             colorScheme: theme.colorScheme
                 .copyWith(secondary: customTheme.cookifyPrimary.withAlpha(40))),
         home: Scaffold(
+          backgroundColor: CustomTheme.accent,
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Center(
-                child: Container(
-                  margin: EdgeInsets.only(top: 20, bottom: 20),
-                  child: Image.asset(
-                    Images.doctor,
-                    width: (MediaQuery.of(context).size.width / 1.8),
+              FxContainer(
+                color: CustomTheme.primary,
+                borderRadius: BorderRadius.only(
+                  bottomLeft:
+                      Radius.circular(MediaQuery.of(context).size.width / 2),
+                  bottomRight:
+                      Radius.circular(MediaQuery.of(context).size.width / 2),
+                ),
+                child: Center(
+                  child: Container(
+                    margin: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height / 3.5,
+                        bottom: 20),
+                    child: Image.asset(
+                      Images.doctor,
+                      width: (MediaQuery.of(context).size.width / 1.8),
+                    ),
                   ),
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(top: 30),
+              FxContainer(
+                color: Colors.white,
+                paddingAll: 0,
+                margin: EdgeInsets.only(top: 70),
                 child: FxButton.outlined(
-                  borderColor: CustomTheme.primary,
+                  borderColor: Colors.white,
                   borderRadiusAll: 11,
+                  backgroundColor: Colors.white,
                   splashColor: CustomTheme.primary.withAlpha(40),
                   padding:
                       FxSpacing.only(left: 20, top: 10, bottom: 10, right: 20),
@@ -85,10 +97,9 @@ class ABookDoctorScreenState extends State<BookDoctorScreen> {
 
                     //open_doctor_results();
                     //pick_category();
-                    //Utils.navigate_to(AppConfig.AccountRegister, context);
                   },
                   child: FxText.l1(
-                    "Book A Doctor",
+                    "Booqo dhakhtar",
                     fontSize: 30,
                     color: CustomTheme.primary,
                     letterSpacing: 0.5,
@@ -140,14 +151,6 @@ class ABookDoctorScreenState extends State<BookDoctorScreen> {
   double lati = 0;
   double long = 0;
 
-  void check_login() async {
-    is_loading = true;
-    is_logged_in = await Utils.is_login();
-    setState(() {
-      is_loading = false;
-    });
-  }
-
   Future<void> get_location() async {
     Position p = await Utils.get_device_location();
     if (p != null) {
@@ -157,12 +160,9 @@ class ABookDoctorScreenState extends State<BookDoctorScreen> {
   }
 
   Future<void> book_doctor() async {
-    List<LocationModel> locs = await LocationModel.get_all();
-    print("romina ======> ${locs.length} <======");
-
     final result = await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => OrderLocationMain()),
+      MaterialPageRoute(builder: (context) => OrderLocationSub()),
     );
 
     if (result != null) {
@@ -178,11 +178,6 @@ class ABookDoctorScreenState extends State<BookDoctorScreen> {
     if (lati == 0 && long == 0) {
       Utils.showSnackBar(
           "You must enable your location to proceed.", context, Colors.red);
-      return;
-    }
-    check_login();
-    if (!is_logged_in) {
-      show_not_account_bottom_sheet(context);
       return;
     }
 

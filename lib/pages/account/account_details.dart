@@ -44,6 +44,7 @@ class AccountDetailsState extends State<AccountDetails> {
 
   @override
   void initState() {
+    AppTheme.init();
     _onRefresh();
   }
 

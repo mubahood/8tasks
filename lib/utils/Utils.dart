@@ -1,15 +1,18 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutx/widgets/text/text.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ict4farmers/models/BannerModel.dart';
+import 'package:ict4farmers/models/HospitalModel.dart';
 import 'package:ict4farmers/models/ProductModel.dart';
 import 'package:ict4farmers/models/UserModel.dart';
 import 'package:ict4farmers/pages/HomPage.dart';
@@ -20,16 +23,16 @@ import 'package:ict4farmers/theme/app_theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../models/CategoryModel.dart';
-import '../models/ChatModel.dart';
 import '../models/DynamicTable.dart';
 import '../models/FormItemModel.dart';
 import '../models/LocationModel.dart';
+import '../models/ServiceModel.dart';
 import '../pages/account/account_details.dart';
 import '../pages/account/account_edit.dart';
 import '../pages/account/account_login.dart';
 import '../pages/account/my_products_screen.dart';
 import '../pages/account/onboarding_widget.dart';
-import '../pages/chat/chat_screen.dart';
+import '../pages/location_picker/PaymentPage.dart';
 import '../pages/other_pages/about_is.dart';
 import '../pages/other_pages/privacy_policy.dart';
 import '../pages/other_pages/sell_fast.dart';
@@ -38,6 +41,14 @@ import '../pages/products/view_full_images_screen.dart';
 import 'AppConfig.dart';
 
 class Utils {
+  static void launch_browser(String _url) {
+    do_launch_browser(_url);
+  }
+
+  static void do_launch_browser(dynamic _url) async {
+    if (!await launch(_url)) throw 'Could not launch $_url';
+  }
+
   static void showSnackBar(String message, BuildContext _context, color,
       {background_color: Colors.green}) {
     if (Colors.green == background_color) {
@@ -53,7 +64,26 @@ class Utils {
   }
 
   static void bootstrap() async {
+    Utils.login_user(new UserModel());
     await LocationModel.get_all();
+    await HospitalModel.get_items(params: {}, clear_previous: true);
+    await ServiceModel.get_items(params: {}, clear_previous: true);
+  }
+
+  static int int_parse(dynamic x) {
+    int temp = 0;
+    int ans = 0;
+    if (x == null) {
+      return 0;
+    }
+    try {
+      temp = int.parse(x.toString());
+      return temp;
+    } catch (e) {
+      temp = 0;
+    }
+
+    return ans;
   }
 
   static bool bool_parse(dynamic x) {
@@ -73,8 +103,7 @@ class Utils {
     return ans;
   }
 
-  static Future<String> http_patch(
-      String path, Map<String, dynamic> body) async {
+  static Future<String> http_patch(String path, Map<String, dynamic> body) async {
     bool is_online = await Utils.is_connected();
     if (!is_online) {
       return "";
@@ -104,8 +133,7 @@ class Utils {
     return "";
   }
 
-  static Future<String> http_post(
-      String path, Map<String, dynamic> body) async {
+  static Future<String> http_post(String path, Map<String, dynamic> body) async {
     bool is_online = await Utils.is_connected();
     if (!is_online) {
       return "";
@@ -211,10 +239,6 @@ class Utils {
       Hive.registerAdapter(LocationModelAdapter());
     }
 
-    if (!Hive.isAdapterRegistered(55)) {
-      Hive.registerAdapter(ChatModelAdapter());
-    }
-
     if (!Hive.isAdapterRegistered(56)) {
       Hive.registerAdapter(DynamicTableAdapter());
     }
@@ -222,6 +246,16 @@ class Utils {
 
   static navigate_to(String screen, context, {dynamic data: null}) {
     switch (screen) {
+      case AppConfig.PaymentPage:
+        Navigator.push(
+          context,
+          PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => PaymentPage(),
+            transitionDuration: Duration.zero,
+          ),
+        );
+        break;
+
       case AppConfig.AccountDetails:
         Navigator.push(
           context,
@@ -286,14 +320,7 @@ class Utils {
         break;
 
       case AppConfig.ChatScreen:
-        Navigator.push(
-          context,
-          PageRouteBuilder(
-            pageBuilder: (context, animation1, animation2) => ChatScreen(data),
-            transitionDuration: Duration.zero,
-          ),
-        );
-        break;
+
 
       case AppConfig.AccountLogin:
         Navigator.push(
@@ -359,7 +386,8 @@ class Utils {
         Navigator.push(
           context,
           PageRouteBuilder(
-            pageBuilder: (context, animation1, animation2) => AccountRegister(),
+            pageBuilder: (context, animation1, animation2) =>
+                AccountRegister(data),
             transitionDuration: Duration.zero,
           ),
         );
@@ -378,8 +406,13 @@ class Utils {
 
   static Future<bool> login_user(UserModel u) async {
     if (await is_login()) {
-      await logged_out();
+      return true;
     }
+
+    Random random = new Random();
+    int randomNumber = random.nextInt(10000000); // from 0 upto 99 included
+
+    u.id = randomNumber;
 
     u.status = 'logged_in';
     u.status_comment = u.id.toString();
@@ -521,5 +554,12 @@ class Utils {
     // When we reach here, permissions are granted and we can
     // continue accessing the position of the device.
     return await Geolocator.getCurrentPosition();
+  }
+
+  static void ini_theme() {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: CustomTheme.primary,
+      statusBarIconBrightness: Brightness.light,
+    ));
   }
 }

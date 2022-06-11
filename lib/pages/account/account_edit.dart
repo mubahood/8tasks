@@ -274,7 +274,7 @@ password
                 },
                 child: Container(
                     padding: FxSpacing.x(0),
-                    child: onLoading ? Text("Loading...") : Icon(Icons.done)),
+                    child: onLoading ? Text("Sug wax yar...") : Icon(Icons.done)),
               ),
             ],
           ),
@@ -385,11 +385,11 @@ password
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
                           context,
-                          errorText: "Phone number required.",
+                          errorText: "Lambarkaaga.",
                         ),
                       ]),
                       decoration: customTheme.input_decoration(
-                          labelText: "Phone number", icon: Icons.phone)),
+                          labelText: "Lambarkaaga", icon: Icons.phone)),
                   FxSpacing.height(10),
                   FormBuilderTextField(
                       name: "company_name",

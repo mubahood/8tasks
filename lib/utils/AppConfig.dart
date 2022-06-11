@@ -1,11 +1,14 @@
 class AppConfig {
-  static String BASE_URL = "https://doctors.ugnews24.info";
-  static const String OUR_PHONE_NUMBER = "+256755906818";
-  static const String OUR_WHATSAPP_NUMBER = "+256755906818";
-  static const String OUR_FACEBOOK_LINK = "https://www.facebook.com/Go-Print-UG-100191332538556";
+  static String BASE_URL = "https://heldhakhtar.com";
+  static const String OUR_PHONE_NUMBER = "+252906561056";
+  static const String OUR_WHATSAPP_NUMBER = "+252906561056";
+  static const String OUR_FACEBOOK_LINK =
+      "https://www.facebook.com/Adeegecaafimaad/";
   static const String OUR_TWITTER_LINK = "https://twitter.com/Goprintug";
-  static const String OUR_INSTAGRAM_LINK = "https://www.instagram.com/goprintug/";
+  static const String OUR_INSTAGRAM_LINK =
+      "https://www.instagram.com/goprintug/";
   static const String HomePage = "HomePage";
+  static const String PaymentPage = "PaymentPage";
   static const String ViewFullImagesScreen = "ViewFullImagesScreen";
   static const String MyProductsScreen = "MyProductsScreen";
   static const String AppName = "Hel-dhaktar";

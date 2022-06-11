@@ -23,7 +23,7 @@ class AppointmentScreen extends StatefulWidget {
 }
 
 late CustomTheme customTheme;
-String title = "Appointment details";
+String title = "Faahfaahinta ballanta";
 
 class AppointmentScreenState extends State<AppointmentScreen> {
   AppointmentModel item;
@@ -63,8 +63,8 @@ class AppointmentScreenState extends State<AppointmentScreen> {
       return Scaffold(
           appBar: AppBar(
             systemOverlayStyle: SystemUiOverlayStyle(
-              statusBarColor: Colors.white,
-              statusBarIconBrightness: Brightness.dark,
+              statusBarColor: CustomTheme.primary,
+              statusBarIconBrightness: Brightness.light,
               // For Android (dark icons)
               statusBarBrightness: Brightness.light, // For iOS (dark icons)
             ),
@@ -97,15 +97,40 @@ class AppointmentScreenState extends State<AppointmentScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+
+
+                    FxButton.block(
+                      elevation: 0,
+                      backgroundColor: CustomTheme.primary,
+                      borderRadiusAll: 0,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          FxText.caption("Lambarka kaarka: #${item.id}",
+                              letterSpacing: 0.3,
+                              fontWeight: 700,
+                              fontSize: 18,
+                              color: CustomTheme.onPrimary)
+                        ],
+                      ),
+                      onPressed: () {
+                        //open_do_action(item);
+                      },
+                    ),
+                    Divider(
+                      height: 30,
+                      thickness: 5,
+                    ),
+
                     FxText.h6(
-                      "Appointment",
+                      "Xogta balanta",
                       fontWeight: 600,
                     ),
-                    singleItem(title: "Service", details: item.details),
+                    singleItem(title: "Adeegga", details: item.details),
                     singleItem(title: "Hospital", details: item.hospital_name),
-                    singleItem(title: "Doctor", details: item.doctor.name),
+                    singleItem(title: "Dhakhtar", details: item.doctor.name),
                     singleItem(title: "Placed", details: item.created_at),
-                    singleItem(title: "Status", details: item.status),
+                    singleItem(title: "Jaantuska  balamaha", details: item.status),
                     singleItem(
                         title: "Appointment time",
                         details: (item.appointment_time.isEmpty)
@@ -116,50 +141,29 @@ class AppointmentScreenState extends State<AppointmentScreen> {
                       thickness: 5,
                     ),
                     FxText.h6(
-                      "Client",
+                      "Warbixinta macmiilka",
                       fontWeight: 600,
                     ),
-                    singleItem(title: "Name", details: item.client.name),
+                    singleItem(title: "Magaca", details: item.client.name),
                     singleItem(
-                        title: "Contact", details: item.client.phone_number),
-                    singleItem(title: "Address", details: item.client.address),
+                        title: "Lambarkaaga", details: item.client.phone_number),
+                    singleItem(title: "xaafada aad dagantahay", details: item.client.address),
                     Divider(
                       height: 30,
                       thickness: 5,
                     ),
                     FxText.h6(
-                      "Payment",
+                      "Xogta lacg bixinta",
                       fontWeight: 600,
                     ),
                     singleItem(
-                        title: "Status",
+                        title: "Lacag bixin",
                         details: item.payment_status.toString()),
-                    singleItem(title: "Amount", details: item.price),
+                    singleItem(title: "Xadiga: USD", details: item.price),
                     singleItem(
-                        title: "Method",
+                        title: "Habka lacag bixita",
                         details: item.payment_method.toString()),
-                    Divider(
-                      height: 30,
-                      thickness: 5,
-                    ),
-                    FxButton.block(
-                      elevation: 0,
-                      backgroundColor: CustomTheme.primary,
-                      borderRadiusAll: 0,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          FxText.caption("DO ACTION",
-                              letterSpacing: 0.3,
-                              fontWeight: 700,
-                              fontSize: 18,
-                              color: CustomTheme.onPrimary)
-                        ],
-                      ),
-                      onPressed: () {
-                        open_do_action(item);
-                      },
-                    )
+
                   ],
                 ),
               ),

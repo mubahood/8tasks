@@ -45,7 +45,7 @@ class LocationSub extends StatefulWidget {
 
 late CustomTheme customTheme;
 String title = "Pick an area";
-bool is_loading = false;
+bool onLoading = false;
 
 class _LocationSub extends State<LocationSub> {
   Map<String, String> initial_data;
@@ -62,7 +62,10 @@ class _LocationSub extends State<LocationSub> {
   List<LocationModel> items = [];
 
   Future<Null> _onRefresh(BuildContext _context) async {
-    is_loading = true;
+    setState(() {
+      onLoading = true;
+    });
+
     setState(() {});
     List<LocationModel> _items = await LocationModel.get_all();
     items.clear();
@@ -74,7 +77,7 @@ class _LocationSub extends State<LocationSub> {
 
     items.sort((a, b) => a.name.compareTo(b.name));
     setState(() {
-      is_loading = false;
+      onLoading = false;
     });
 
     return null;
@@ -98,7 +101,7 @@ class _LocationSub extends State<LocationSub> {
           ),
         ),
         body: SafeArea(
-          child: is_loading
+          child: onLoading
               ? ShimmerListLoadingWidget()
               : RefreshIndicator(
                   onRefresh: _do_refresh,

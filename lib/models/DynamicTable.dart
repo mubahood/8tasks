@@ -13,11 +13,30 @@ class DynamicTable extends HiveObject {
     required Map<String, dynamic> params,
   }) async {
     List<DynamicTable> items = [];
+    List<DynamicTable> ready_items = [];
+    List<int> done_ids = [];
 
-    await DynamicTable.get_online_items(
+    DynamicTable.get_online_items(
         end_point: end_point, clear_previous: clear_previous, params: params);
+    items = await DynamicTable.get_local_items(endpoint: end_point);
+    if (items.isEmpty) {
+      await DynamicTable.get_online_items(
+          end_point: end_point, clear_previous: clear_previous, params: params);
+      items = await DynamicTable.get_local_items(endpoint: end_point);
+    }
+    done_ids.clear();
+    ready_items.clear();
+    done_ids = [];
+    ready_items = [];
 
-    return items;
+    items.forEach((element) {
+      if (!done_ids.contains(Utils.int_parse(element.own_id))) {
+        done_ids.add(Utils.int_parse(element.own_id));
+        ready_items.add(element);
+      }
+    });
+
+    return ready_items;
   }
 
   static Future<List<DynamicTable>> get_online_items({
@@ -49,7 +68,9 @@ class DynamicTable extends HiveObject {
 
       for (int count = 0; count < current_items.length; count++) {
         if (clear_previous) {
-          await current_items[count].delete();
+          try {
+            await current_items[count].delete();
+          } catch (e) {}
         } else {
           if (new_ids.contains(current_items[count].own_id)) {
             await current_items[count].delete();
@@ -103,11 +124,14 @@ class DynamicTable extends HiveObject {
     if (box.values.isEmpty) {
       return [];
     }
-
+    List<int> done_ids = [];
     List<DynamicTable> items = [];
     box.values.forEach((element) {
       if (element.data_type == endpoint) {
-        items.add(element);
+        if (!done_ids.contains(Utils.int_parse(element.own_id))) {
+          done_ids.add(Utils.int_parse(element.own_id));
+          items.add(element);
+        }
       }
     });
 

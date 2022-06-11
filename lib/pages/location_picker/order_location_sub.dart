@@ -9,30 +9,28 @@ import 'package:provider/provider.dart';
 import '../../models/LocationModel.dart';
 import '../../theme/app_notifier.dart';
 import '../../widget/shimmer_list_loading_widget.dart';
+import 'order_hospital_picker.dart';
 
 class OrderLocationSub extends StatefulWidget {
-  Map<String, String> initial_data;
-
-  OrderLocationSub(this.initial_data);
+  OrderLocationSub();
 
   @override
-  State<OrderLocationSub> createState() => OorderLocationSub(this.initial_data);
+  State<OrderLocationSub> createState() => OorderLocationSub();
 }
 
 late CustomTheme customTheme;
-String title = "Pick an a city";
+String title = "Dooro magaalada";
 bool is_loading = false;
 
 class OorderLocationSub extends State<OrderLocationSub> {
-  Map<String, String> initial_data;
-
-  OorderLocationSub(this.initial_data);
+  OorderLocationSub();
 
   @override
   void initState() {
     super.initState();
     customTheme = AppTheme.customTheme;
     _do_refresh();
+    AppTheme.init();
   }
 
   List<LocationModel> items = [];
@@ -40,14 +38,7 @@ class OorderLocationSub extends State<OrderLocationSub> {
   Future<Null> _onRefresh(BuildContext _context) async {
     is_loading = true;
     setState(() {});
-    List<LocationModel> _items = await LocationModel.get_all();
-    items.clear();
-    _items.forEach((element) {
-      if (element.parent_id.toString() == initial_data['parent_id']) {
-        items.add(element);
-      }
-    });
-
+    items = await LocationModel.get_all();
     items.sort((a, b) => a.name.compareTo(b.name));
     setState(() {
       is_loading = false;
@@ -62,15 +53,33 @@ class OorderLocationSub extends State<OrderLocationSub> {
         builder: (BuildContext context, AppNotifier value, Widget? child) {
       return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
+          // remove back button in appbar.
+          backgroundColor: CustomTheme.primary,
           systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: Colors.white,
-            statusBarIconBrightness: Brightness.dark,
-            statusBarBrightness: Brightness.light, // For iOS (dark icons)
+            statusBarColor: CustomTheme.primary,
+            statusBarIconBrightness: Brightness.light,
+            statusBarBrightness: Brightness.dark, // For iOS (dark icons)
           ),
           elevation: .5,
-          title: Text(
-            title,
-            style: TextStyle(color: Colors.black),
+          title: Row(
+            children: [
+              InkWell(
+                onTap: () => {Navigator.pop(context)},
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 10.0),
+                  child: Icon(
+                    Icons.arrow_back,
+                    size: 30,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              Text(
+                title,
+                style: TextStyle(color: Colors.white),
+              ),
+            ],
           ),
         ),
         body: SafeArea(
@@ -107,7 +116,11 @@ class OorderLocationSub extends State<OrderLocationSub> {
       dense: true,
       title: FxText.h3(item.name, fontWeight: 400, fontSize: 20),
       onTap: () {
-        print("Good to go!");
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => OrderHospitalPicker(item.id)),
+        );
+
         //Navigator.pop(context, {"location_sub_id": item.id.toString(), "location_sub_name": item.name});
       },
     );

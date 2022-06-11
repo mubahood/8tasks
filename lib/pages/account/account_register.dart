@@ -4,16 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutx/flutx.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:ict4farmers/pages/location_picker/location_main.dart';
 import 'package:ict4farmers/theme/app_theme.dart';
 import 'package:ict4farmers/utils/Utils.dart';
-import 'package:ict4farmers/widgets/images.dart';
 
 import '../../models/UserModel.dart';
 import '../../utils/AppConfig.dart';
 
 class AccountRegister extends StatefulWidget {
+  dynamic params;
+
+  AccountRegister(this.params);
+
   @override
   _AccountRegisterState createState() => _AccountRegisterState();
 }
@@ -31,65 +33,74 @@ class _AccountRegisterState extends State<AccountRegister> {
     super.initState();
     customTheme = AppTheme.customTheme;
     theme = AppTheme.theme;
-    get_location();
+    confirmation_text = widget.params['msg'].toString();
+    setState(() {
+
+    });
   }
+
+  String product_id = "";
+  String confirmation_text = "";
 
   @override
   Widget build(BuildContext context) {
     //setState(() { onLoading = false;});
 
     Future<void> submit_form() async {
+      product_id = widget.params['id'].toString();
+
+      if (widget.params == null) {
+        if (widget.params['id'] == null) {
+          product_id = widget.params['id'].toString();
+        }
+      }
       error_message = "";
-      setState(() {});
-      if (!_formKey.currentState!.validate()) {
-        return;
+
+      UserModel logged = await Utils.get_logged_in();
+      if (logged.id < 1) {
+        await Utils.login_user(new UserModel());
+        logged = await Utils.get_logged_in();
       }
 
-      if (_formKey.currentState?.fields['password_2']?.value !=
-          _formKey.currentState?.fields['password_1']?.value) {
-        error_message = "Passwords don't match.";
-        setState(() {});
+      if (logged.id < 1) {
+        Utils.showSnackBar("Failed to login.", context, Colors.white);
+      }
+
+      if (!_formKey.currentState!.validate()) {
         return;
       }
 
       onLoading = true;
       setState(() {});
-      String _resp = await Utils.http_post('api/users', {
-        'password': _formKey.currentState?.fields['password_1']?.value,
+      String _resp = await Utils.http_post('api/appointments', {
+        'product_id': product_id,
         'name': _formKey.currentState?.fields['name']?.value,
-        'email': _formKey.currentState?.fields['email']?.value,
-        'sub_county': sub_county,
-        'latitude': latitude,
-        'longitude': longitude,
+        'client_id': logged.id.toString(),
+        'phone': _formKey.currentState?.fields['phone']?.value,
+        'address': _formKey.currentState?.fields['address']?.value,
       });
 
       onLoading = false;
       setState(() {});
 
       if (_resp == null || _resp.isEmpty) {
-        setState(() {
-          error_message =
-              "Failed to connect to internet. Please check your network and try again.";
-        });
+        Utils.showSnackBar(
+            'Failed to connect to internet. Please check your network and try again.',
+            context,
+            CustomTheme.primary);
         return;
       }
       dynamic resp_obg = jsonDecode(_resp);
-      if (resp_obg['status'].toString() != "1") {
-        error_message = resp_obg['message'];
-        setState(() {});
+      if (resp_obg['status'].toString() != '1') {
+        Utils.showSnackBar(
+            resp_obg['message'].toString(), context, Colors.white,
+            background_color: Colors.red);
         return;
       }
 
-      UserModel u = UserModel.fromMap(resp_obg['data']);
+      Utils.showSnackBar(resp_obg['message'].toString(), context, Colors.white);
 
-      if (await Utils.login_user(u)) {
-        Navigator.pushNamedAndRemoveUntil(
-            context, "/HomesScreen", (r) => false);
-      } else {
-        error_message =
-            "Account created but failed to login. Please try again.";
-        setState(() {});
-      }
+      Utils.navigate_to(AppConfig.PaymentPage, context);
     }
 
     return Theme(
@@ -104,23 +115,26 @@ class _AccountRegisterState extends State<AccountRegister> {
               key: _formKey,
               child: Column(
                 children: [
-                  Container(
-                    child: Image.asset(
-                      Images.logo_1,
-                      height: 70,
-                    ),
-                  ),
                   FxSpacing.height(16),
                   FxText.h3(
-                    "Create an Account",
+                    "Doctor appointment confirmation",
                     color: CustomTheme.primary,
                     fontWeight: 800,
                     textAlign: TextAlign.center,
                   ),
+                  Container(
+                    margin: EdgeInsets.only(top: 25),
+                    child: FxText(
+                      confirmation_text,
+                      fontWeight: 600,
+                      fontSize: 18,
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
                   FxSpacing.height(32),
                   FormBuilderTextField(
                       name: "name",
-                      keyboardType: TextInputType.name,
+                      keyboardType: TextInputType.text,
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
                           context,
@@ -137,112 +151,48 @@ class _AccountRegisterState extends State<AccountRegister> {
                           errorText: "Name too long.",
                         ),
                       ]),
+                      textInputAction: TextInputAction.next,
                       decoration: customTheme.input_decoration(
-                          labelText: "Your Full Name", icon: Icons.person)),
+                          labelText: "Magacaaga oo sadexan", icon: Icons.person)),
                   FxSpacing.height(24),
                   FormBuilderTextField(
-                      name: "email",
-                      keyboardType: TextInputType.emailAddress,
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(
-                          context,
-                          errorText: "Email address required.",
-                        ),
-                        FormBuilderValidators.email(
-                          context,
-                          errorText: "Enter valid email address.",
-                        ),
-                      ]),
-                      decoration: customTheme.input_decoration(
-                          labelText: "Email address",
-                          icon: Icons.alternate_email)),
-                  FxSpacing.height(24),
-                  FormBuilderTextField(
-                      name: "district",
-                      readOnly: true,
-                      onTap: () => {pick_location()},
-                      textCapitalization: TextCapitalization.sentences,
+                      name: "phone",
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.phone,
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
                           context,
-                          errorText: "Location is required.",
+                          errorText: "Lambarkaaga",
                         ),
                       ]),
                       decoration: customTheme.input_decoration(
-                          labelText: "Your location", icon: Icons.place)),
+                          labelText: "Lambarkaaga", icon: Icons.call)),
                   FxSpacing.height(24),
                   FormBuilderTextField(
-                      name: "gps",
-                      textCapitalization: TextCapitalization.sentences,
-                      readOnly: true,
-                      onTap: () => {get_location()},
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(
-                          context,
-                          errorText: "Location on map (GPS) is needed.",
-                        ),
-                      ]),
-                      decoration: customTheme.input_decoration(
-                          labelText: "Location on map (GPS)",
-                          icon: Icons.gps_fixed)),
-                  FxSpacing.height(24),
-                  FormBuilderTextField(
-                    name: "password_1",
-                    keyboardType: TextInputType.visiblePassword,
+                    name: "address",
+                    textInputAction: TextInputAction.done,
+                    keyboardType: TextInputType.text,
                     validator: FormBuilderValidators.compose([
                       FormBuilderValidators.required(
                         context,
-                        errorText: "Password is required.",
+                        errorText: "Xaafada aad dagan tahay..",
                       ),
                       FormBuilderValidators.minLength(
                         context,
                         2,
-                        errorText: "Password too short.",
+                        errorText: "Xaafada aad dagan tahay.",
                       ),
                       FormBuilderValidators.maxLength(
                         context,
-                        45,
-                        errorText: "Password too long.",
+                        200,
+                        errorText: "Xaafada aad dagan tahay too long.",
                       ),
                     ]),
                     decoration: customTheme.input_decoration(
-                        labelText: "Password", icon: Icons.lock_outline),
+                        labelText: "Xaafada aad dagan tahay",
+                        icon: Icons.location_on_rounded),
                   ),
-                  FxSpacing.height(24),
-                  FormBuilderTextField(
-                      name: "password_2",
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(
-                          context,
-                          errorText: "Password is required.",
-                        ),
-                        FormBuilderValidators.minLength(
-                          context,
-                          2,
-                          errorText: "Password too short.",
-                        ),
-                        FormBuilderValidators.maxLength(
-                          context,
-                          45,
-                          errorText: "Password too long.",
-                        ),
-                      ]),
-                      decoration: customTheme.input_decoration(
-                          labelText: "Re-enter Password",
-                          icon: Icons.lock_outline)),
                   FxSpacing.height(10),
-                  FxButton.text(
-                      onPressed: () {
-                        Utils.navigate_to(AppConfig.PrivacyPolicy, context);
-                      },
-                      splashColor: CustomTheme.primary.withAlpha(40),
-                      child: FxText.l2(
-                          "I have read and agreed with Privacy Policy  of ${AppConfig.AppName}.",
-                          textAlign: TextAlign.center,
-                          decoration: TextDecoration.underline,
-                          color: CustomTheme.primary)),
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -278,17 +228,10 @@ class _AccountRegisterState extends State<AccountRegister> {
                           },
                           backgroundColor: CustomTheme.primary,
                           child: FxText.l1(
-                            "Create an Account",
+                            "REQUEST APPOINTMENT",
                             color: customTheme.cookifyOnPrimary,
+                            fontSize: 20,
                           )),
-                  FxSpacing.height(16),
-                  FxButton.text(
-                      onPressed: () {
-                        Utils.navigate_to(AppConfig.AccountLogin, context);
-                      },
-                      splashColor: CustomTheme.primary.withAlpha(40),
-                      child: FxText.l2("I have already an account",
-                          fontSize: 14, color: CustomTheme.accent)),
                   FxSpacing.height(16),
                 ],
               ),
@@ -297,41 +240,5 @@ class _AccountRegisterState extends State<AccountRegister> {
         ),
       ),
     );
-  }
-
-  String district = "";
-  String longitude = "";
-  String latitude = "";
-  String sub_county = "";
-
-  Future<void> get_location() async {
-    Position p = await Utils.get_device_location();
-    if (p != null) {
-      if (p.latitude != null && p.longitude != null) {
-        latitude = p.latitude.toString();
-        longitude = p.longitude.toString();
-        _formKey.currentState!.patchValue({
-          'gps': "${longitude},${longitude}",
-        });
-      }
-    }
-  }
-
-  Future<void> pick_location() async {
-    final result = await Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => LocationMain()),
-    );
-
-    if (result != null) {
-      if ((result['location_sub_id'] != null) &&
-          (result['location_sub_name'] != null)) {
-        district = result['location_sub_name'];
-        sub_county = result['location_sub_id'];
-        _formKey.currentState!.patchValue({
-          'district': district,
-        });
-      }
-    }
   }
 }

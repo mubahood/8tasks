@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutx/widgets/text/text.dart';
 import 'package:flutx/widgets/widgets.dart';
-import 'package:ict4farmers/pages/location_picker/order_location_sub.dart';
 import 'package:ict4farmers/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 
@@ -16,20 +15,17 @@ class OrderLocationMain extends StatefulWidget {
   State<OrderLocationMain> createState() => OrderLocationMainState();
 }
 
-late CustomTheme customTheme;
 String title = "Pick a region";
 bool is_loading = false;
 
 class OrderLocationMainState extends State<OrderLocationMain> {
   final PageController pageController = PageController(initialPage: 0);
-  late ThemeData theme;
 
   @override
   void initState() {
     super.initState();
-    customTheme = AppTheme.customTheme;
-    theme = AppTheme.theme;
     _do_refresh();
+    AppTheme.init();
   }
 
   @override
@@ -64,15 +60,16 @@ class OrderLocationMainState extends State<OrderLocationMain> {
         builder: (BuildContext context, AppNotifier value, Widget? child) {
       return Scaffold(
         appBar: AppBar(
+          backgroundColor: CustomTheme.primary,
           systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: Colors.white,
-            statusBarIconBrightness: Brightness.dark,
+            statusBarColor: CustomTheme.primary,
+            statusBarIconBrightness: Brightness.light,
             statusBarBrightness: Brightness.light, // For iOS (dark icons)
           ),
           elevation: .5,
           title: Text(
             title,
-            style: TextStyle(color: Colors.black),
+            style: TextStyle(color: Colors.white),
           ),
         ),
         body: SafeArea(
@@ -115,7 +112,7 @@ class OrderLocationMainState extends State<OrderLocationMain> {
   }
 
   Future<void> pick_location(LocationModel item) async {
-    final result = await Navigator.push(
+    /* final result = await Navigator.push(
       context,
       MaterialPageRoute(
           builder: (context) => OrderLocationSub({
@@ -123,7 +120,7 @@ class OrderLocationMainState extends State<OrderLocationMain> {
               })),
     );
 
-    /* if (result != null) {
+   if (result != null) {
       if ((result['location_sub_id'] != null) &&
           (result['location_sub_name'] != null)) {
         Navigator.pop(context, {

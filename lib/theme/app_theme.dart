@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutx/flutx.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ict4farmers/theme/theme_type.dart';
+import 'package:ict4farmers/utils/Utils.dart';
 
 import 'custom_theme.dart';
 
@@ -25,8 +26,9 @@ class AppTheme {
 
   static init() {
     resetFont();
-    FxAppTheme.changeLightTheme(lightTheme);
-    FxAppTheme.changeDarkTheme(darkTheme);
+    //FxAppTheme.changeLightTheme(lightTheme);
+    //FxAppTheme.changeDarkTheme(darkTheme);
+    Utils.ini_theme();
   }
 
   static resetFont() {

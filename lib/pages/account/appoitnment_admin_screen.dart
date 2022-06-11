@@ -57,7 +57,7 @@ class _AppointmentAdminScreenState extends State<AppointmentAdminScreen> {
           ? item.payment_method.toString()
           : 'not paid',
       'appointment_time': item.appointment_time.toString(),
-      'price': item.price.toString(),
+      'price': "USD "+item.price.toString(),
     });
 
     setState(() {});
@@ -179,7 +179,7 @@ password
                 },
                 child: Container(
                     padding: FxSpacing.x(0),
-                    child: onLoading ? Text("Loading...") : Icon(Icons.done)),
+                    child: onLoading ? Text("Sug wax yar...") : Icon(Icons.done)),
               ),
             ],
           ),

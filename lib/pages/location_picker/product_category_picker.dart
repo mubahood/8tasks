@@ -28,6 +28,7 @@ class PproducCcategorPpicker extends State<ProductCategoryPicker> {
     super.initState();
     customTheme = AppTheme.customTheme;
     _do_refresh();
+    AppTheme.init();
   }
 
   List<CategoryModel> items = [];

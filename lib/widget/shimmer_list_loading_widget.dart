@@ -8,7 +8,7 @@ Widget ShimmerListLoadingWidget(
     double height: 70,
     bool is_circle: false,
     double padding: 15.0}) {
-  return Text("Loading...");
+  return Text("Sug wax yar...");
   return Container(
     height: double.infinity - 200,
     child: ListView(
