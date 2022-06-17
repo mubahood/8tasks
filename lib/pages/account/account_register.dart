@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutx/flutx.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:ict4farmers/pages/location_picker/location_main.dart';
 import 'package:ict4farmers/theme/app_theme.dart';
 import 'package:ict4farmers/utils/Utils.dart';
 
@@ -117,7 +116,7 @@ class _AccountRegisterState extends State<AccountRegister> {
                 children: [
                   FxSpacing.height(16),
                   FxText.h3(
-                    "Doctor appointment confirmation",
+                    "Pet Order Confirmation",
                     color: CustomTheme.primary,
                     fontWeight: 800,
                     textAlign: TextAlign.center,
